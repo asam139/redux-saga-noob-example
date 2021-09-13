@@ -4,12 +4,17 @@ import {
   Form, Input, Button, Checkbox,
 } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { login } from './authenticationSlice';
+import { login } from '../features/authSlice';
 
 function LoginPage() {
+  const dispatch = useDispatch();
   const loader = useSelector((state) => state.auth.loader);
 
-  const dispatch = useDispatch();
+  const onFinish = () => {
+    dispatch(login(
+      { email: 'eve.holt@reqres.in', password: 'cityslicka' },
+    ));
+  };
 
   return (
     <div className="container">
@@ -19,9 +24,7 @@ function LoginPage() {
         initialValues={{
           remember: true,
         }}
-        onFinish={() => dispatch(login(
-          { email: 'eve.holt@reqres.in', password: 'cityslicka' },
-        ))}
+        onFinish={onFinish}
       >
         <Form.Item
           name="username"

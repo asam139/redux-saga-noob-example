@@ -6,7 +6,7 @@ const initialState = {
 };
 
 const authSlice = createSlice({
-  name: 'authentication',
+  name: 'auth',
   initialState,
   reducers: {
     login(state) {
@@ -25,4 +25,4 @@ const authSlice = createSlice({
 
 export const { login, loginSuccess, loginFailure } = authSlice.actions;
 
-export const authReducer = authSlice.reducer
+export const authReducer = authSlice.reducer;

@@ -3,15 +3,15 @@ import { useSelector } from 'react-redux';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Redirect,
 } from 'react-router-dom';
 import './App.scss';
 import ProtectedRoutes from './routes/ProtectedRoutes';
+import { PrivateRoute } from './routes/PrivateRoute';
+import { PublicRoute } from './routes/PublicRoute';
 
-const LoginPage = lazy(() => import('./features/OnBoarding/LoginPage'));
+const LoginPage = lazy(() => import('./views/LoginPage'));
 
-function App() {
+export const App = () => {
   // Getting isAuthenticated store value from Authentication slice.
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
@@ -29,42 +29,4 @@ function App() {
       </Suspense>
     </Router>
   );
-}
-
-const PrivateRoute = ({ children, isAuthenticated }) => {
-  console.log(isAuthenticated);
-  return (
-    <Route render={({ location }) => (isAuthenticated ? (
-      children
-    ) : (
-      <Redirect
-        to={{
-          pathname: '/login',
-          state: { from: location },
-        }}
-      />
-    ))}
-    />
-  );
 };
-
-// Public route restrict to access authenticated pages before login.
-const PublicRoute = ({ children, isAuthenticated, ...rest }) => (
-  <Route
-    {...rest}
-    render={
-        ({ location }) => (!isAuthenticated ? (
-          children
-        ) : (
-          <Redirect
-            to={{
-              pathname: '/dashboard',
-              state: { from: location },
-            }}
-          />
-        ))
-      }
-  />
-);
-
-export default App;
