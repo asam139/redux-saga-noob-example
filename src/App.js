@@ -13,7 +13,7 @@ const LoginPage = lazy(() => import('./features/OnBoarding/LoginPage'));
 
 function App() {
   // Getting isAuthenticated store value from Authentication slice.
-  const isAuthenticated = useSelector((state) => state.authentication.isAuthenticated);
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   return (
     <Router>
@@ -31,19 +31,22 @@ function App() {
   );
 }
 
-const PrivateRoute = ({ children, isAuthenticated }) => (
-  <Route render={({ location }) => (isAuthenticated ? (
-    children
-  ) : (
-    <Redirect
-      to={{
-        pathname: '/login',
-        state: { from: location },
-      }}
+const PrivateRoute = ({ children, isAuthenticated }) => {
+  console.log(isAuthenticated);
+  return (
+    <Route render={({ location }) => (isAuthenticated ? (
+      children
+    ) : (
+      <Redirect
+        to={{
+          pathname: '/login',
+          state: { from: location },
+        }}
+      />
+    ))}
     />
-  ))}
-  />
-);
+  );
+};
 
 // Public route restrict to access authenticated pages before login.
 const PublicRoute = ({ children, isAuthenticated, ...rest }) => (

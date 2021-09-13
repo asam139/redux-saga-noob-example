@@ -1,11 +1,11 @@
 import axios from 'axios';
-import constants from '../common/utils/constants';
+import { Constants } from '../common/utils/constants';
 
 const axiosClient = axios.create();
 
-axiosClient.defaults.baseURL = constants.HOST_URL;
+axiosClient.defaults.baseURL = Constants.HOST_URL;
 
-axiosClient.defaults.headers = constants.headers;
+axiosClient.defaults.headers = Constants.headers;
 
 // To share cookies to cross site domain, change to true.
 axiosClient.defaults.withCredentials = false;

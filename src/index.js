@@ -1,16 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
-import store from './app/store';
+import './index.css';
+import { setUpStore } from './app/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const { store, persistor } = setUpStore();
+
 ReactDOM.render(
   <React.StrictMode>
-    {/* Redux Provider is included access the store values from anywhere inside the child components. */}
-    <Provider store={store()}>
-      <App />
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),

@@ -7,7 +7,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { login } from './authenticationSlice';
 
 function LoginPage() {
-  const loader = useSelector((state) => state.authentication.loader);
+  const loader = useSelector((state) => state.auth.loader);
 
   const dispatch = useDispatch();
 

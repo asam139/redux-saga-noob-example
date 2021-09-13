@@ -1,9 +1,6 @@
-import authentication from '../features/OnBoarding/authenticationSlice';
+import { combineReducers } from '@reduxjs/toolkit'
+import { authReducer } from '../features/OnBoarding/authenticationSlice';
 
-// Include all the reducer to combine and provide to configure store.
-
-const rootReducer = {
-  authentication,
-};
-
-export default rootReducer;
+export const rootReducer = combineReducers({
+  auth: authReducer,
+})

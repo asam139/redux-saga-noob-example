@@ -1,19 +1,27 @@
-import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
+import { configureStore, createImmutableStateInvariantMiddleware } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
-import rootReducer from './rootReducers';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
+import { rootReducer } from './rootReducers';
 import rootSaga from './rootSaga';
 
-export default function configureAppStore(preloadedState) {
+export const setUpStore = (preloadedState) => {
+  const immutableInvariantMiddleware = createImmutableStateInvariantMiddleware();
   const sagaMiddleware = createSagaMiddleware();
+
+  const persistConfig = {
+    key: 'root',
+    storage,
+  };
+  const persistedReducer = persistReducer(persistConfig, rootReducer);
   const store = configureStore({
-    reducer: rootReducer,
-    middleware: [...getDefaultMiddleware(), sagaMiddleware],
+    reducer: persistedReducer,
+    middleware: [immutableInvariantMiddleware, sagaMiddleware],
     preloadedState,
   });
+  const persistor = persistStore(store);
+
   sagaMiddleware.run(rootSaga);
 
-  if (process.env.NODE_ENV !== 'production' && module.hot) {
-    module.hot.accept('app/rootReducers', () => store.replaceReducer(rootReducer));
-  }
-  return store;
-}
+  return { store, persistor };
+};
