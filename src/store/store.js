@@ -1,5 +1,6 @@
 import { configureStore, createImmutableStateInvariantMiddleware } from '@reduxjs/toolkit';
 import createSagaMiddleware from 'redux-saga';
+import logger from 'redux-logger';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import { rootReducer } from './rootReducers';
@@ -17,7 +18,7 @@ export const setUpStore = (preloadedState) => {
   const persistedReducer = persistReducer(persistConfig, rootReducer);
   const store = configureStore({
     reducer: persistedReducer,
-    middleware: [immutableInvariantMiddleware, sagaMiddleware],
+    middleware: [logger, immutableInvariantMiddleware, sagaMiddleware],
     preloadedState,
   });
   const persistor = persistStore(store);
