@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   List,
@@ -16,7 +16,7 @@ const UsersView = () => {
   const loading = useSelector(isLoadingUsersSelector);
   const users = useSelector(filteredUsersSelector);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(getUsers());
   }, []);
 
