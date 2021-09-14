@@ -28,7 +28,7 @@ const UsersView = () => {
     dispatch(filterUsersBy({ email: value }));
   };
 
-  const usersCountFooterText = useMemo(() => `${users.length} users found`, [users]);
+  const usersCountFooterText = useMemo(() => `${users ? users.length : 0} users found`, [users]);
 
   return (
     <div style={{
