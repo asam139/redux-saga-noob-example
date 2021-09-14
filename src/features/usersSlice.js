@@ -17,6 +17,7 @@ const usersSlice = createSlice({
       const users = payload.data;
       state.loading = false;
       state.list = users;
+      state.filteredList = users;
     },
     usersFailure: (state) => {
       state.loading = false;
