@@ -9,12 +9,13 @@ import { PublicRoute } from './routes/PublicRoute';
 import { isAuthenticatedSelector } from './selectors/auth';
 import routes from './routes/routes';
 import { PrivateRoute } from './routes/PrivateRoute';
+import LoadingSpinner from './components/LoadingSpinner';
 
 export const App = () => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
   return (
     <Router>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<LoadingSpinner />}>
         <Switch>
           {
             routes.map(({
