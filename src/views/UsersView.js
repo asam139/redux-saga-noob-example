@@ -1,23 +1,36 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { List, Avatar } from 'antd';
-import { isLoadingUsersSelector, usersSelector } from '../selectors/users';
-import { getUsers } from '../features/usersSlice';
+import { List, Avatar, Input } from 'antd';
+import { filteredUsersSelector, isLoadingUsersSelector, usersSelector } from '../selectors/users';
+import { getUsers, filterUsersBy } from '../features/usersSlice';
+
+const { Search } = Input;
 
 const UsersView = () => {
   const dispatch = useDispatch();
-  const loading = useSelector(isLoadingUsersSelector);
-  console.log(loading);
-  const users = useSelector(usersSelector);
+  // const loading = useSelector(isLoadingUsersSelector);
+  // console.log(loading);
+  const users = useSelector(filteredUsersSelector);
 
   useEffect(() => {
     dispatch(getUsers());
   }, []);
 
+  const onChange = (ev) => {
+    dispatch(filterUsersBy({ email: ev.target.value }));
+  };
+
+  const onSearch = (value) => {
+    console.log(value);
+    dispatch(filterUsersBy({ email: value }));
+  };
+
   return (
     <>
       <List
-        header={<div>Header</div>}
+        header={
+          <Search placeholder="Type to search by email" onChange={onChange} onSearch={onSearch} enterButton />
+        }
         footer={<div>Footer</div>}
         bordered
         dataSource={users}

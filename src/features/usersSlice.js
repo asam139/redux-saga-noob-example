@@ -22,9 +22,15 @@ const usersSlice = createSlice({
       state.loading = false;
       state.list = [];
     },
+    filterUsersBy: () => {},
+    setFilteredUsers: (state, action) => {
+      state.filteredList = action.payload;
+    },
   },
 });
 
-export const { getUsers, usersSuccess, usersFailure } = usersSlice.actions;
+export const {
+  getUsers, usersSuccess, usersFailure, filterUsersBy, setFilteredUsers,
+} = usersSlice.actions;
 
 export const usersReducer = usersSlice.reducer;
