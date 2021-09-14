@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   List,
@@ -6,7 +6,7 @@ import {
   Input,
 } from 'antd';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { filteredUsersSelector, isLoadingUsersSelector, usersSelector } from '../selectors/users';
+import { filteredUsersSelector, isLoadingUsersSelector } from '../selectors/users';
 import { getUsers, filterUsersBy } from '../features/usersSlice';
 
 const { Search } = Input;
@@ -28,6 +28,8 @@ const UsersView = () => {
     dispatch(filterUsersBy({ email: value }));
   };
 
+  const usersCountFooterText = useMemo(() => `${users.length} users found`, [users]);
+
   return (
     <>
       {loading ? (
@@ -37,7 +39,7 @@ const UsersView = () => {
           header={
             <Search placeholder="Type to search by email" onChange={onChange} onSearch={onSearch} enterButton />
           }
-          footer={<div>Footer</div>}
+          footer={<div>{usersCountFooterText}</div>}
           bordered
           dataSource={users}
           renderItem={({ avatar, email }) => (
