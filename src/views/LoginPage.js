@@ -4,11 +4,12 @@ import {
   Form, Input, Button, Checkbox,
 } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { login } from '../features/authSlice';
+import { login } from '../features/loginSlice';
+import { isLoadingSelector } from '../selectors/login';
 
 function LoginPage() {
   const dispatch = useDispatch();
-  const loader = useSelector((state) => state.auth.loader);
+  const loader = useSelector(isLoadingSelector);
 
   const onFinish = () => {
     dispatch(login(

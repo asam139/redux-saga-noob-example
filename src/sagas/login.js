@@ -2,7 +2,7 @@ import {
   call, put, takeLatest,
 } from 'redux-saga/effects';
 import * as loginApi from '../api/login';
-import { login, loginSuccess, loginFailure } from '../features/authSlice';
+import { login, loginSuccess, loginFailure } from '../features/loginSlice';
 
 function* loginGen(action) {
   try {

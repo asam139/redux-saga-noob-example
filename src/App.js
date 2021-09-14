@@ -8,13 +8,12 @@ import './App.scss';
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import { PrivateRoute } from './routes/PrivateRoute';
 import { PublicRoute } from './routes/PublicRoute';
+import { isAuthenticatedSelector } from './selectors/auth';
 
 const LoginPage = lazy(() => import('./views/LoginPage'));
 
 export const App = () => {
-  // Getting isAuthenticated store value from Authentication slice.
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-
+  const isAuthenticated = useSelector(isAuthenticatedSelector);
   return (
     <Router>
       <Suspense fallback={<div>Loading...</div>}>

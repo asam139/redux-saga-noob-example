@@ -12,6 +12,7 @@ export const setUpStore = (preloadedState) => {
   const persistConfig = {
     key: 'root',
     storage,
+    whitelist: ['auth'],
   };
   const persistedReducer = persistReducer(persistConfig, rootReducer);
   const store = configureStore({

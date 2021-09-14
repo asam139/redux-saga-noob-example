@@ -13,7 +13,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 * Write your global scss in App.scss file.
 
-* Write your authentication API's in features/OnBoarding/auth.js file.
+* Write your authentication API's in features/OnBoarding/login.js file.
 
 * Include your component reducer, saga in root.js and rootReducers.js to add them to redux middleware.
 
