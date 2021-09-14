@@ -2,13 +2,14 @@ import { lazy } from 'react';
 
 const routes = [
   {
-    path: 'dashboard',
-    component: lazy(() => import('../views/Dashboard')),
+    path: 'login',
+    component: lazy(() => import('../views/LoginView')),
     exact: true,
+    isPublic: true,
   },
   {
     path: 'users',
-    component: lazy(() => import('../views/Users')),
+    component: lazy(() => import('../views/UsersView')),
     exact: true,
   },
 ];

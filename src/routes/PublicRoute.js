@@ -1,20 +1,20 @@
-import React from "react";
-import { Redirect, Route } from "react-router-dom";
+import React from 'react';
+import { Redirect, Route } from 'react-router-dom';
 
 export const PublicRoute = ({ children, isAuthenticated, ...rest }) => (
-    <Route
-        {...rest}
-        render={
+  <Route
+    {...rest}
+    render={
             ({ location }) => (!isAuthenticated ? (
-                children
+              children
             ) : (
-                <Redirect
-                    to={{
-                        pathname: '/dashboard',
-                        state: { from: location },
-                    }}
-                />
+              <Redirect
+                to={{
+                  pathname: '/users',
+                  state: { from: location },
+                }}
+              />
             ))
         }
-    />
+  />
 );

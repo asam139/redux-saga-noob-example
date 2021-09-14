@@ -1,16 +1,14 @@
-import React, { lazy, Suspense } from 'react';
+import React, { Suspense } from 'react';
 import { useSelector } from 'react-redux';
 import {
-  BrowserRouter as Router,
+  BrowserRouter as Router, Redirect,
   Switch,
 } from 'react-router-dom';
 import './App.scss';
-import ProtectedRoutes from './routes/ProtectedRoutes';
-import { PrivateRoute } from './routes/PrivateRoute';
 import { PublicRoute } from './routes/PublicRoute';
 import { isAuthenticatedSelector } from './selectors/auth';
-
-const LoginPage = lazy(() => import('./views/LoginPage'));
+import routes from './routes/routes';
+import { PrivateRoute } from './routes/PrivateRoute';
 
 export const App = () => {
   const isAuthenticated = useSelector(isAuthenticatedSelector);
@@ -18,12 +16,24 @@ export const App = () => {
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
         <Switch>
-          <PublicRoute path="/login" isAuthenticated={isAuthenticated}>
-            <LoginPage />
-          </PublicRoute>
-          <PrivateRoute path="/" isAuthenticated={isAuthenticated}>
-            <ProtectedRoutes />
-          </PrivateRoute>
+          {
+            routes.map(({
+              component: Component, path, exact, isPublic,
+            }, index) => {
+              const Route = isPublic ? PublicRoute : PrivateRoute;
+              return (
+                <Route
+                  isAuthenticated={isAuthenticated}
+                  path={`/${path}`}
+                  key={index}
+                  exact={exact}
+                >
+                  <Component />
+                </Route>
+              );
+            })
+          }
+          <Redirect from="*" to="/users" />
         </Switch>
       </Suspense>
     </Router>

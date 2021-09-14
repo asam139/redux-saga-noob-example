@@ -7,7 +7,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { login } from '../features/loginSlice';
 import { isLoadingSelector } from '../selectors/login';
 
-function LoginPage() {
+const LoginView = () => {
   const dispatch = useDispatch();
   const loader = useSelector(isLoadingSelector);
 
@@ -80,6 +80,6 @@ function LoginPage() {
       </Form>
     </div>
   );
-}
+};
 
-export default LoginPage;
+export default LoginView;
