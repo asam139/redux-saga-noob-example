@@ -1,9 +1,11 @@
 import { all } from 'redux-saga/effects';
-import { authSagas } from './login';
+import { loginSagas } from './login';
+import { usersSagas } from './users';
 
 function* root() {
   yield all([
-    ...authSagas,
+    ...loginSagas,
+    ...usersSagas,
   ]);
 }
 

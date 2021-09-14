@@ -4,7 +4,7 @@ import {
 import * as loginApi from '../api/login';
 import { login, loginSuccess, loginFailure } from '../features/loginSlice';
 
-function* loginGen(action) {
+function* loginWorker(action) {
   try {
     const response = yield call(() => loginApi.login(action.payload));
     yield put(loginSuccess(response.data));
@@ -14,7 +14,7 @@ function* loginGen(action) {
 }
 
 function* watchLogin() {
-  yield takeLatest(login, loginGen);
+  yield takeLatest(login, loginWorker);
 }
 
-export const authSagas = [watchLogin()];
+export const loginSagas = [watchLogin()];

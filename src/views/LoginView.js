@@ -9,7 +9,7 @@ import { isLoadingSelector } from '../selectors/login';
 
 const LoginView = () => {
   const dispatch = useDispatch();
-  const loader = useSelector(isLoadingSelector);
+  const loading = useSelector(isLoadingSelector);
 
   const onFinish = () => {
     dispatch(login(
@@ -68,7 +68,7 @@ const LoginView = () => {
 
         <Form.Item>
           <Button
-            loading={loader}
+            loading={loading}
             type="primary"
             htmlType="submit"
             className="login-form-button"

@@ -19,6 +19,7 @@ module.exports = {
     'react',
   ],
   rules: {
+    'no-unused-vars': 'warn',
     'max-len': ['error', { code: 200 }],
     'no-param-reassign': 'off',
     'react/prop-types': 'off',
