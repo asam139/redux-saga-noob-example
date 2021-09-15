@@ -80,7 +80,7 @@ const UsersView = () => {
       {loading ? (
         <LoadingSpinner />
       ) : (
-        <div style={{ width: '80wh', height: '60vh' }}>
+        <div style={{ width: '80vw', height: '60vh' }}>
           <List
             header={headerList}
             footer={footerList}
