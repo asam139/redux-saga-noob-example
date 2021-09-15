@@ -2,6 +2,7 @@ import {
   call, put, takeLatest,
   select,
   debounce,
+  spawn,
 } from 'redux-saga/effects';
 import * as usersApi from '../api/users';
 import {
@@ -33,4 +34,4 @@ function* watchFilterUsersBy() {
   yield debounce(500, filterUsersBy, filterUsersByWorker);
 }
 
-export const usersSagas = [watchGetUsers(), watchFilterUsersBy()];
+export const usersSagas = [spawn(watchGetUsers), spawn(watchFilterUsersBy)];

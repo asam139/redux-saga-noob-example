@@ -4,7 +4,7 @@ import {
   Form, Input, Button, Checkbox,
 } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import { login } from '../features/loginSlice';
+import { login } from '../features/authSlice';
 import { isLoadingSelector } from '../selectors/login';
 
 const LoginView = () => {

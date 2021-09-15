@@ -1,8 +1,8 @@
 import {
-  call, put, takeLatest,
+  call, put, takeLatest, spawn,
 } from 'redux-saga/effects';
 import * as loginApi from '../api/login';
-import { login, loginSuccess, loginFailure } from '../features/loginSlice';
+import { login, loginSuccess, loginFailure } from '../features/authSlice';
 
 function* loginWorker(action) {
   try {
@@ -17,4 +17,4 @@ function* watchLogin() {
   yield takeLatest(login, loginWorker);
 }
 
-export const loginSagas = [watchLogin()];
+export const authSagas = [spawn(watchLogin)];

@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginSuccess, loginFailure } from './loginSlice';
 
 const initialState = {
   isAuthenticated: false,
@@ -9,20 +8,27 @@ const initialState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
-  extraReducers: {
-    [loginSuccess]: (state, action) => {
+  reducers: {
+    login: (state) => {
+      state.loading = true;
+    },
+    loginSuccess: (state, action) => {
       const { payload } = action;
       const { token } = payload;
       state.isAuthenticated = !!token;
       state.token = token;
     },
-    [loginFailure]: (state) => {
+    loginFailure: (state) => {
       state.isAuthenticated = false;
       state.token = null;
     },
   },
+  extraReducers: {
+
+  },
 });
+
+export const { login, loginSuccess, loginFailure } = authSlice.actions;
 
 // export const { } = authSlice.actions;
 
